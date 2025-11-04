@@ -8,6 +8,7 @@ import Loading from "../pages/Loading";
 import AllProducts from "../pages/AllProducts";
 import ProductDetails from "../pages/ProductDetails";
 import MyBids from "../pages/MyBids";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
             },
             {
                  path:"/productDetails/:id",
-                Component:ProductDetails,
+                element:<PrivateRoute><ProductDetails/></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:3000/productDetails/${params.id}`)
             },
             {

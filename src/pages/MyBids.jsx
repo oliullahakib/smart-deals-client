@@ -6,11 +6,18 @@ const MyBids = () => {
     const { user } = use(AuthContext)
     const [bids, setBids] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/bids?email=${user.email}`)
+        fetch(`http://localhost:3000/bids?email=${user.email}`,{
+            headers:{
+                authorization:`Berarer ${user.accessToken}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setBids(data))
+            .then(data =>{ 
+                console.log(data)
+                setBids(data)
+            })
             .catch(err => console.log(err))
-    }, [user.email])
+    }, [user])
     const handleRemoveBid = (id) => {
 
         const swalWithBootstrapButtons = Swal.mixin({

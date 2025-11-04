@@ -31,7 +31,7 @@ const [loading, setLoading] = useState(true);
       })
       return unsubscribe
     }, [])
-    
+    console.log(user)
     const value = {
         creatUser,
         logoutUser,
