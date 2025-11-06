@@ -6,14 +6,14 @@ const MyBids = () => {
     const { user } = use(AuthContext)
     const [bids, setBids] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/bids?email=${user.email}`,{
-            headers:{
-                authorization:`Berarer ${user.accessToken}`
+        fetch(`https://smart-deals-server-api-lyart.vercel.app/bids?email=${user.email}`, {
+            headers: {
+                authorization: `Berarer ${user.accessToken}`
             }
         })
             .then(res => res.json())
-            .then(data =>{ 
-                console.log(data)
+            .then(data => {
+             
                 setBids(data)
             })
             .catch(err => console.log(err))
@@ -39,14 +39,14 @@ const MyBids = () => {
             if (result.isConfirmed) {
 
                 // delete functionality 
-                fetch(`http://localhost:3000/bids/${id}`, {
+                fetch(`https://smart-deals-server-api-lyart.vercel.apps/bids/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
                     .then(data => {
-                         console.log(data)
+                        
                         if (data.deletedCount) {
-                            const restBids=bids.filter(bid=>bid._id!==id);
+                            const restBids = bids.filter(bid => bid._id !== id);
                             setBids(restBids)
 
                             swalWithBootstrapButtons.fire({

@@ -4,7 +4,6 @@ import ProductCard from '../components/Home/ProductCard';
 
 const AllProducts = () => {
     const allProducts = useLoaderData();
-    console.log(allProducts)
     return (
         <div>
             <div className='bg-gray-200 py-10'>

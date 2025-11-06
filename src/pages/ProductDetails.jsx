@@ -15,9 +15,9 @@ const ProductDetails = () => {
         e.preventDefault();
         const bid_price = Number(e.target.price.value);
         const buyer_contact = e.target.contact.value;
-        const newBid = { product:productId, buyer_image: user.photoURL, buyer_name: user.displayName, buyer_email: user.email, bid_price, buyer_contact, status: "pending" }
+        const newBid = { product: productId, buyer_image: user.photoURL, buyer_name: user.displayName, buyer_email: user.email, bid_price, buyer_contact, status: "pending" }
         // console.log("bid", newBid);
-        fetch('http://localhost:3000/bid', {
+        fetch('https://smart-deals-server-api-lyart.vercel.apps/bid', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -35,8 +35,8 @@ const ProductDetails = () => {
                         timer: 1500
                     });
                     modalRef.current.close()
-                    newBid._id=data.insertedId;
-                    const newBids=[...bids,newBid].sort((a,b)=>b.bid_price-a.bid_price)
+                    newBid._id = data.insertedId;
+                    const newBids = [...bids, newBid].sort((a, b) => b.bid_price - a.bid_price)
                     setBids(newBids)
                 }
             })
@@ -44,7 +44,7 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/bids/${productId}`)
+        fetch(`https://smart-deals-server-api-lyart.vercel.apps/bids/${productId}`)
             .then(res => res.json())
             .then(data => setBids(data))
             .catch(err => console.log(err))
@@ -162,70 +162,70 @@ const ProductDetails = () => {
             <div className='mt-20 pb-5'>
                 <h2 className='text-5xl font-bold'> Bids For This Products: <span className='text-linear'>{bids.length}</span></h2>
                 <div className="overflow-x-auto">
-                {
-                    bids.length===0?
-                    <div className='flex justify-center items-center'>
-                        <p className='text-base-200 font-bold text-2xl'>No Bids for This Product</p>
-                    </div>
-                    :<table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>SL No</th>
-                            <th>Product</th>
-                            <th>Seller</th>
-                            <th>Bid Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                       {
-                        bids.map((bid,index)=> <tr key={bid._id} >
-                            <th>{index+1}</th>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle h-12 w-12">
-                                            <img
-                                                src={image}
-                                                alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{title}</div>
-                                        <div className="text-sm opacity-50">${price_min}-{price_max}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle h-12 w-12">
-                                            <img
-                                                src={bid.buyer_image}
-                                                alt="Avatar " />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{bid.buyer_name}</div>
-                                        <div className="text-sm opacity-50">{bid.buyer_email}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>{bid.bid_price}</td>
-                            <th>
-                                <button className="btn bg-transparent text-[#4CAF50] btn-xs mr-3">Accept Offer</button>
-                                <button className="btn bg-transparent text-red-400 btn-xs">Reject  offer</button>
-                            </th>
-                        </tr>)
-                       }
-                        
-                    </tbody>
-                  
-                </table>
-                }
-            </div>
+                    {
+                        bids.length === 0 ?
+                            <div className='flex justify-center items-center'>
+                                <p className='text-base-200 font-bold text-2xl'>No Bids for This Product</p>
+                            </div>
+                            : <table className="table">
+                                {/* head */}
+                                <thead>
+                                    <tr>
+                                        <th>SL No</th>
+                                        <th>Product</th>
+                                        <th>Seller</th>
+                                        <th>Bid Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* row 1 */}
+                                    {
+                                        bids.map((bid, index) => <tr key={bid._id} >
+                                            <th>{index + 1}</th>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle h-12 w-12">
+                                                            <img
+                                                                src={image}
+                                                                alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">{title}</div>
+                                                        <div className="text-sm opacity-50">${price_min}-{price_max}</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle h-12 w-12">
+                                                            <img
+                                                                src={bid.buyer_image}
+                                                                alt="Avatar " />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">{bid.buyer_name}</div>
+                                                        <div className="text-sm opacity-50">{bid.buyer_email}</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{bid.bid_price}</td>
+                                            <th>
+                                                <button className="btn bg-transparent text-[#4CAF50] btn-xs mr-3">Accept Offer</button>
+                                                <button className="btn bg-transparent text-red-400 btn-xs">Reject  offer</button>
+                                            </th>
+                                        </tr>)
+                                    }
+
+                                </tbody>
+
+                            </table>
+                    }
+                </div>
             </div>
         </div>
     );

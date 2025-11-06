@@ -12,12 +12,12 @@ const Register = () => {
         const email = e.target.email.value;
         const photoURL = e.target.image.value;
         const password = e.target.password.value;
-        console.log(email, password)
+       
         creatUser(email, password)
             .then((userCredential) => {
                 // Signed up 
                 const currentUser = userCredential.user;
-                console.log(currentUser);
+                
                 //  updateUser
                 const userObj = { displayName, photoURL }
                 updateUser(currentUser, userObj)
@@ -38,8 +38,8 @@ const Register = () => {
     }
     const handleGoogleLogin = () => {
         googleLogin()
-            .then((result) => {
-                console.log(result.user)
+            .then(() => {
+              
             }).catch((error) => {
                 const errorCode = error.code;
                 console.log(errorCode)

@@ -15,10 +15,10 @@ const Navbar = () => {
                 <>
                     <li><NavLink to={"/myProducts"}>My Products</NavLink></li>
                     <li><NavLink to={"/myBids"}>My Bids</NavLink></li>
+                    <li><NavLink to={"/creatAProduct"}>Creat A Product</NavLink></li>
                 </>
                 : ""
         }
-        <li><NavLink to={"/creatProduct"}>Creat Product</NavLink></li>
     </>
     const handleLogout = () => {
         logoutUser()
